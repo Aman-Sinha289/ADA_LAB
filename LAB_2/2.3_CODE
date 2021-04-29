@@ -1,0 +1,42 @@
+#include<time.h>
+#include<stdlib.h>
+int main()
+{
+    int arr[50], size, i, j, k, element, index;
+    printf("Enter Size the size of the array: ");
+    scanf("%d", &size);
+    printf("Enter the Array Elements: ", size);
+    time_t start,end;
+    time(&start);
+    for(i=0; i<size; i++)
+        scanf("%d", &arr[i]);
+    for(i=1; i<size; i++)
+    {
+        element = arr[i];
+        if(element<arr[i-1])
+        {
+            for(j=0; j<=i; j++)
+            {
+                if(element<arr[j])
+                {
+                    index = j;
+                    for(k=i; k>j; k--)
+                        arr[k] = arr[k-1];
+                    break;
+                }
+            }
+        }
+        else
+            continue;
+        arr[index] = element;
+    }
+    time(&end);
+    double time_taken= end-start;
+    printf("\nSorted Array:\n");
+    for(i=0; i<size; i++)
+        {printf("%d ", arr[i]);}
+printf("\ntime taken=%1f\n",time_taken);
+    getch();
+    
+    return 0;
+}
