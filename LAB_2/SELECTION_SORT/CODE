@@ -1,44 +1,39 @@
-#include<stdio.h>
 #include<conio.h>
 #include<time.h>
 #include<stdlib.h>
+#include<dos.h>
 int main()
 {
-    int arr[50], size, i, j, k, element, index;
-    printf("Enter Size the size of the array: ");
-    scanf("%d", &size);
-    printf("Enter the Array Elements: ", size);
-    time_t start,end;
-    time(&start);
-    for(i=0; i<size; i++)
-        scanf("%d", &arr[i]);
-    for(i=1; i<size; i++)
-    {
-        element = arr[i];
-        if(element<arr[i-1])
-        {
-            for(j=0; j<=i; j++)
-            {
-                if(element<arr[j])
-                {
-                    index = j;
-                    for(k=i; k>j; k--)
-                        arr[k] = arr[k-1];
-                    break;
-                }
-            }
-        }
-        else
-            continue;
-        arr[index] = element;
-    }
-    time(&end);
-    double time_taken= end-start;
-    printf("\nSorted Array:\n");
-    for(i=0; i<size; i++)
-        {printf("%d ", arr[i]);}
+int a[100], n, i, j, position, swap;
+printf("Enter number of elements");
+scanf("%d", &n);
+printf("Enter %d Numbers\n", n);
+time_t start,end;
+time(&start);
+for (i = 0; i < n; i++)
+scanf("%d", &a[i]);
+for(i = 0; i < n - 1; i++)
+{
+position=i;
+for(j = i + 1; j < n; j++)
+{
+if(a[position] > a[j])
+position=j;
+}
+if(position != i)
+{
+swap=a[i];
+a[i]=a[position];
+a[position=swap];
+}
+}
+
+double time_taken= end-start;
+printf("Sorted Array:");
+for(i = 0; i < n; i++)
+printf("\n%d", a[i]);
+time(&end);
 printf("\ntime taken=%1f\n",time_taken);
-    getch();
-    
-    return 0;
+return 0;
+
 }
