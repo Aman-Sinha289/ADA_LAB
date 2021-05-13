@@ -1,1 +1,85 @@
+#include<stdio.h>
+#include<conio.h>
+int a[20][20],q[20],vnodes[20],n,i,j,f=0,r=-1,reach[20];
+void breadth_first_search(int v)
+{
+     for(i=1;i<=n;i++)
+     {
+       if(a[v][i] && !vnodes[i])
+       q[++r]=i;
+     }
+     if(f<=r)
+    {
+       vnodes[q[f]]=1;
+       breadth_first_search(q[f++]);
+    }
+}
+void dfs(int v)
+{
+reach[v]=1;
+for(i=1;i<=n;i++)
+if(a[v][i] && !reach[i])
+{
+printf("\n %d->%d",v,i);
+dfs(i);
+}
+
+int main(void)
+ {
+   int v, choice,count=0;
+   printf("\n Enter the number of vertices present in the graph:");
+   scanf("%d",&n);
+   for(i=1;i<=n;i++)
+      {
+          q[i]=0;
+          vnodes[i]=0;
+      }
+   
+    printf("\n Enter graph data in the form of matrix:\n");
+    for(i=1;i<=n;i++)
+    {
+       for(j=1;j<=n;j++)
+        {
+          scanf("%d",&a[i][j]);
+        }
+    }
+          printf("Thank you for entering the matrix");
+          printf("Enter your choice\n1.Print all the nodes reachable from a given starting node in a digraph using BFS method\n2.Check whether a given graph is connected or not using DFS method.");
+          scanf("%d",&choice);
+          switch (choice)
+          {
+          case 1:  printf("\n Enter the starting vertex:");
+                   scanf("%d",&v);
+                   breadth_first_search(v);
+      
+                 printf("\n The node which are reachable are:\n");
+                    for(i=1;i<=n;i++)
+                     {
+                      if(vnodes[i])
+                      printf("%d\t",i);
+                     }
+
+              break;
+          case 2:  dfs(1);
+                   printf("\n");
+                   for(i=1;i<=n;i++)
+                  {
+                   if(reach[i])
+                   count++;
+                  }
+                  if(count==n)
+                    printf("\n Graph is connected");
+                  else
+                    printf("\n Graph is not connected");
+              break;
+          
+          default: printf("You entered the wrong choice");
+              break;
+          }
+    
+
+
+    
+ }
+}
 
