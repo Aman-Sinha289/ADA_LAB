@@ -1,1 +1,60 @@
+#include <stdio.h>
+ 
+int main()
+{
+    int num,choice;
+    int n1, n2;
+    int p;
+    int hcf(int n1, int n2);
+    void towers(int, char, char, char);
+    printf("enter the number of attempts:");
+    scanf("%d",&p);
+    for(int i=0;i<p;i++)
+    {
+    printf("enter your choice:\n1.TOH\n2.GCD\n");
+    scanf("%d",&choice);
+    switch (choice)
+    {
+    case 1: 
+   
+    printf("Enter the number of disks : ");
+    scanf("%d", &num);
+    printf("The sequence is :\n");
 
+    towers(num, 'A', 'C', 'B');
+    break;
+    
+
+    case 2: 
+  
+    printf("Enter two integers: ");
+    scanf("%d %d", &n1, &n2);
+   
+    printf("G.C.D of %d and %d is %d.", n1, n2, hcf(n1, n2));
+    break;
+    
+    default:printf("enter a valid choice");
+        break;
+    }
+    }
+   
+}
+void towers(int num, char fp, char tp, char ap)
+{
+    if (num == 1)
+    {
+        printf("\n Move disk 1 from peg %c to peg %c", fp, tp);
+        return;
+    }
+    towers(num - 1, fp, ap, tp);
+    printf("\n Move disk %d from peg %c to peg %c", num, fp, tp);
+    towers(num - 1, ap, tp, fp);
+}
+
+int hcf(int n1, int n2) 
+{
+    if (n2 != 0)
+        return hcf(n2, n1 % n2);
+    else
+        return n1;
+}
